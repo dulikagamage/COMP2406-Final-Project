@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/template.css">
+    <title>Activity Generator</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Activity Generator</h1>
+
+        <!-- Login form -->
+        <form id="loginForm" action="/login" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <button type="submit">Login</button>
+        </form>
+
+        <!-- Guest signup form -->
+        <form id="signupForm" action="/signup/guest" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <!-- Add a hidden field to indicate guest signup -->
+            <input type="hidden" name="guestSignup" value="true">
+            <!-- Add submit button -->
+            <button type="submit">Sign Up</button>
+        </form>
+
+        {{#if user}}
+            <script src="/scripts/apps.js"></script>
+            <script>
+                // Define hideForms function
+                function hideForms() {
+                    const loginForm = document.getElementById('loginForm');
+                    const signupForm = document.getElementById('signupForm');
+
+                    // Hide login and signup forms
+                    loginForm.style.display = 'none';
+                    signupForm.style.display = 'none';
+                }
+                
+                // Call hideForms
+                hideForms();s
+            </script>
+            <form onsubmit="loadActivity(); return false;">
+                <label for="typeFilter">Type:</label>
+                <select id="typeFilter">
+                    <option value="education">Education</option>
+                    <option value="recreational">Recreational</option>
+                    <option value="social">Social</option>
+                    <option value="charity">Charity</option>
+                    <option value="cooking">Cooking</option>
+                    <option value="relaxation">Relaxation</option>
+                    <option value="busywork">Busywork</option>
+                </select>
+
+                <label for="participantsFilter">Participants:</label>
+                <input type="number" id="participantsFilter" min="1" max="8" value="1">
+
+                <button type="button" onclick="loadActivity()">Submit</button>
+                
+                <button type="button" onclick="fetchUserList()">Fetch User List</button>
+            </form>
+
+            <div id="contentContainer"></dsiv>
+        {{/if}}
+    </div>
+    <script src="/scripts/apps.js"></script>
+</body>
+</html>
